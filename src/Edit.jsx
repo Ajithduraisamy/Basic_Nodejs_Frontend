@@ -8,7 +8,8 @@ function Edit() {
 
     let getdata= async()=>{
         try {
-            const res=await axios.get(`http://localhost:3001/user/${params.id}`)
+            /* const res=await axios.get(`http://localhost:3001/user/${params.id}`) */
+            const res=await axios.get(`https://nodejs-gikj.onrender.com/user/${params.id}`)
             setUser(res.data)
         } catch (error) {
             

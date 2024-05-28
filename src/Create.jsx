@@ -24,7 +24,8 @@ function Create() {
         },
         onSubmit: async (values) => {
             try {
-                await axios.post('http://localhost:3001/user', values);
+                /* await axios.post('http://localhost:3001/user', values); */
+                await axios.post('https://nodejs-gikj.onrender.com/user', values);
                 navigate('/');
             } catch (error) {
                 console.error("Error submitting form:", error.message);

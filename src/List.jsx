@@ -8,7 +8,8 @@ function List() {
 
   const getData = async () => {
     try {
-      const userRes = await axios.get("http://localhost:3001/users");
+      /* const userRes = await axios.get("http://localhost:3001/users"); */
+      const userRes = await axios.get("https://nodejs-gikj.onrender.com/users");
       setUsers(userRes.data);
     } catch (err) {
       setError(err.message);
@@ -17,7 +18,8 @@ function List() {
   };
 
   const deleteData = async(id)=>{
-    await axios.delete(`http://localhost:3001/user/${id}`);
+    /* await axios.delete(`http://localhost:3001/user/${id}`); */
+    await axios.delete(`https://nodejs-gikj.onrender.com/user/${id}`);
     getData();
   }
 
