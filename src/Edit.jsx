@@ -29,8 +29,8 @@ function Edit() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Updating user with:', user);
     try {
-      // Ensure `user` is defined and contains the necessary fields
       await axios.put(`https://nodejs-gikj.onrender.com/user/${params.id}`, {
         name: user.name,
         age: user.age
