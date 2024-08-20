@@ -5,20 +5,26 @@ import { useParams, useNavigate } from 'react-router-dom';
 function Edit() {
   const params = useParams();
   const navigate = useNavigate();
-  const [user, setUser] = useState({ name: '', age: '' });
+  const [user, setUser] = useState({ name: '', age: 0 });
 
-  const getData = async () => {
-    try {
-      const res = await axios.get(`https://nodejs-gikj.onrender.com/user/${params.id}`);
-      setUser(res.data);
-    } catch (error) {
-      console.error("Error fetching user:", error.message);
-    }
-  };
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await axios.get(`https://nodejs-gikj.onrender.com/user/${params.id}`);
+        setUser(res.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error.message);
+      }
+    };
+    getData();
+  }, [params.id]);
 
-  const handleInputChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -32,10 +38,6 @@ function Edit() {
     }
   };
 
-  useEffect(() => {
-    getData();
-  }, []);
-
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -44,7 +46,7 @@ function Edit() {
           type="text"
           name="name"
           value={user.name}
-          onChange={handleInputChange}
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -53,7 +55,7 @@ function Edit() {
           type="number"
           name="age"
           value={user.age}
-          onChange={handleInputChange}
+          onChange={handleChange}
         />
       </div>
       <button type="submit">Update</button>
