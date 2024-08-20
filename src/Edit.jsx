@@ -30,7 +30,11 @@ function Edit() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`https://nodejs-gikj.onrender.com/user/${params.id}`, user);
+      // Ensure `user` is defined and contains the necessary fields
+      await axios.put(`https://nodejs-gikj.onrender.com/user/${params.id}`, {
+        name: user.name,
+        age: user.age
+      });
       navigate('/');
     } catch (error) {
       console.error("Error updating user:", error.message);
